@@ -39,9 +39,10 @@ class calcThread():
         else:
             return None
 
-    def sendResult(self, endpoint):
-        self.url = "http://development.sherbernog.ml/mucp_backend/brick.php" + endpoint
-        self.urlresponse = ur.urlopen(self.url).read().decode("UTF-8")
+    def contactServer(self, reason):
+        self.url = "http://development.sherbernog.ml/mucp_backend/brick.php?"
+        self.payload = up.urlencode({'reason':reason}).encode("UTF-8")
+        self.urlresponse = ur.urlopen(self.url, self.payload).read().decode("UTF-8")
         jsonresponse = json.loads(self.urlresponse)
         print(jsonresponse)
 
